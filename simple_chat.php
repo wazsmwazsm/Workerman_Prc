@@ -1,7 +1,7 @@
 <?php
 
 use Workerman\Worker;
-require_once __DIR__ . '/Workerman/Autoloader.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
 // 全局变量，用来分配进程 ID
 $global_uid = 0;
