@@ -2,6 +2,13 @@
 
 namespace Protocols;
 
+/*
+
+  自定义协议 : 以 { "firstName":"Bill" , "lastName":"Gates" } json 数据为数据格式，\n 字符为结尾的协议
+
+*/
+
+
 class JsonNL
 {
     /**
@@ -25,7 +32,7 @@ class JsonNL
 
     /**
      * 打包，当向客户端发送数据的时候会自动调用
-     * @param string $buffer
+     * @param array\object $buffer
      * @return string
      */
     public static function encode($buffer)
@@ -35,15 +42,15 @@ class JsonNL
     }
 
     /**
-     * 解包，当接收到的数据字节数等于input返回的值（大于0的值）自动调用
+     * 解包，当接收到的数据字节数等于 input 返回的值（大于0的值）自动调用
      * 并传递给onMessage回调函数的$data参数
-     * @param string $buffer
-     * @return string
+     * @param string $json_str
+     * @return array/object
      */
-    public static function decode($buffer)
+    public static function decode($json_str)
     {
         // 去掉换行，还原成数组
-        return json_decode(trim($buffer), true);
+        return json_decode(trim($json_str), true);
     }
 
 }
