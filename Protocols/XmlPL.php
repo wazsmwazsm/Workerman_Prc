@@ -10,10 +10,10 @@ namespace Protocols;
 
 数据包样本
 
-0000000121
+0000000121<?xml version="1.0" encoding="ISO-8859-1"?>
 <request>
-  <module>user</module>
-  <action>getInfo</action>
+    <module>user</module>
+    <action>getInfo</action>
 </request>
 
 其中0000000121代表整个数据包长度，后面紧跟xml数据格式的包体内容
