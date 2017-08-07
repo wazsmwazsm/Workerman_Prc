@@ -40,7 +40,7 @@ class JsonInt
         // 计算整个包的长度，首部4字节+包体字节数
         $total_length = 4 + strlen($body_json_str);
         // 返回打包数据 N -- 无符号长整数 (32位, 大端字节序)
-        return pack('N', $total_length) . $body_json_str;
+        return pack('N', $total_length).$body_json_str;
     }
 
     public static function decode($json_string)
