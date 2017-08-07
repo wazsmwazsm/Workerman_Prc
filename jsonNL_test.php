@@ -1,7 +1,7 @@
 <?php
-use Workerman\Worker;
-require_once __DIR__ . '/vendor/autoload.php';
 
+require_once __DIR__ . '/vendor/autoload.php';
+use Workerman\Worker;
 // 创建一个 worker , 监听指定端口, http 协议通信
 $jsonpl_worker = new Worker("JsonNL://0.0.0.0:600");
 
