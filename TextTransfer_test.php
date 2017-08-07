@@ -3,7 +3,7 @@
 require_once __DIR__ . '/vendor/autoload.php';
 use Workerman\Worker;
 // 创建一个 worker , 监听指定端口, http 协议通信
-$binary_worker = new Worker("BinaryPL://0.0.0.0:600");
+$binary_worker = new Worker("TextTransfer://0.0.0.0:600");
 
 // 启动 1 个进程
 $binary_worker->count = 1;
