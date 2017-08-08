@@ -2,8 +2,6 @@
 require_once dirname(dirname(__FILE__)) . '/vendor/autoload.php';
 
 use Workerman\Worker;
-use Workerman\Lib\Timer;
-
 
 // worker实例1有4个进程，进程id编号将分别为0、1、2、3
 $worker1 = new Worker('tcp://0.0.0.0:600');
