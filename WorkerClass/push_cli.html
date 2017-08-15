@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      ws = new WebSocket('ws://workerman.app:6788');
+      ws.onopen = function() {
+        var uid = 'uid' + parseInt(10 * Math.random());
+        ws.send(uid);
+      };
+
+      ws.onmessage = function(e) {
+        console.log(e.data);
+      };
+
+    </script>
+  </body>
+</html>
