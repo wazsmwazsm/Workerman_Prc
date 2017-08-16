@@ -23,12 +23,21 @@ use Workerman\Worker;
 $worker = new Worker('websocket://0.0.0.0:6788');
 $worker->count = 1;
 
-// $worker->onWorkerStart = function($worker) {
-//     $inner_text_worker = new Worker('text://0.0.0.0:600');
-//     $inner_text_worker->onMessage = function($con, $data) {
-//         echo 'a';
-//     };
-// };
+$worker->onWorkerStart = function($worker) {
+    // 开启一个内部端口，方便内部系统推送数据
+    $inner_text_worker = new Worker('text://0.0.0.0:7895');
+    // 处理推送程序发送的数据
+    $inner_text_worker->onMessage = function($con, $buffer) use(&$worker) {
+        $data = json_decode($buffer, TRUE);
+        $uid = $data['uid'];
+        // 推送数据到每个客户端连接
+        $ret = sendMsgByUid($worker, $uid, $buffer);
+        // 向推送程序返回推送结果
+        $con->send($ret ? 'ok' : 'fail');
+    };
+    // 执行监听
+    $inner_text_worker->listen();
+};
 
 // 新增属性，保存 uid 和 connection 的映射关系
 $worker->uidConnections = [];
@@ -38,16 +47,15 @@ $worker->onMessage = function($con, $data) use(&$worker) {
         $con->uid = $data;
         // 保存 uid 和 连接 的映射，方便查找连接推送消息
         $worker->uidConnections[$con->uid] = $con;
+        // 广播消息
+        broadcast($worker, 'user '.$con->uid.' online');
     }
-
-    // 广播消息
-    broadcast($worker, 'user '.$con->uid.' online');
 };
 
 $worker->onClose = function($con) use(&$worker) {
     if(isset($con->uid)) {
         // 删除映射
-        unset($woker->uidConnections[$con->uid]);
+        unset($worker->uidConnections[$con->uid]);
     }
     // 广播消息
     broadcast($worker, 'user '.$con->uid.' offline');
