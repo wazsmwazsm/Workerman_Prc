@@ -29,12 +29,14 @@ $worker->onConnect = function($con) {
 
 Worker::runAll();
 /*
-  TCP 80 端口发起 http 请求
+  TCP 80 端口发起 http 请求 注意 http 要求的换行是 \r\n , 结束要求两个 \r\n
+  所以编码的文本要 CRLG 编码格式
 
-GET /ad/ratio/getNativeAd?package_name=com.sg.squareeditor&channel=googleplay&statue=2 HTTP/1.1
+GET /SquareMaker/getBg?bg_name=2 HTTP/1.1
 Host: material.app
 User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.7.6)
 Gecko/20050225 Firefox/1.0.1
 Connection: Keep-Alive
+
 
 */
