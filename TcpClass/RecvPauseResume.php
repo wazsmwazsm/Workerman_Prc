@@ -2,6 +2,7 @@
 
 require_once dirname(dirname(__FILE__)) . '/vendor/autoload.php';
 use Workerman\Worker;
+use Workerman\Lib\Timer;
 
 /*
     void Connection::pauseRecv(void)
