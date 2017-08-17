@@ -51,3 +51,5 @@ $worker = new Worker('tcp://0.0.0.0:600');
 $worker->onMessage = function($con, $data) {
     $con->send('I got '.$data."\n");
 };
+// 运行worker
+Worker::runAll();
