@@ -22,6 +22,10 @@ $worker->onWorkerStart = function($worker) {
       返回值  void
     */
     // channel 客户端连接到 channel 服务端
+    // 看 channel 组件的代码 : 原理就是通过多个 worker 进程个开一个 channel 客户端
+    // channel 客户端向 channel 服务端发送事件，channel 服务端将所有的客户端的连接、事件
+    // 保存起来，然后由 channel 客户端的不同动作进行广播事件(发送信息给收藏的连接)，达到
+    // 多进程通信
     Client::connect('127.0.0.1', 2206);
     /*
       void \Channel\Client::on(string $event_name, callback $callback_function)
@@ -62,24 +66,27 @@ $worker->onMessage = function($con, $data) {
         // 设置为 null，所以下面的 publish 也不管用了
         // 因为是常驻内存，一个 worker 中的 Client 类的静态属性修改后
         // 会保持这个值在内存中
-        // 只取消了当前进程的消息订阅
+        // 看 channel 的 server 代码，适用 unsubscribe 只取消了当前进程的消息订阅
+        // 除非在 onWorkerStart 中才能对所有的订阅进行取消
         Client::unsubscribe('broadcast');
+    } else {
+        /*
+          void \Channel\Client::publish(string $event_name, mixed $event_data)
+          发布某个事件，所有这个事件的订阅者会收到这个事件并触发on($event_name, $callback)注册的回调$callback
+
+          参数
+            $event_name
+            发布的事件名称，可以是任意的字符串。如果事件没有任何订阅者，事件将被忽略。
+
+            $event_data
+            事件相关的数据，可以是数字、字符串或者数组
+        */
+        // 向所有 worker 进程发布 broadcast 事件 看 channel 的 server 代码，这个是针对所有连接的
+        Client::publish('broadcast', $event_data);
     }
 
 
-    /*
-      void \Channel\Client::publish(string $event_name, mixed $event_data)
-      发布某个事件，所有这个事件的订阅者会收到这个事件并触发on($event_name, $callback)注册的回调$callback
 
-      参数
-        $event_name
-        发布的事件名称，可以是任意的字符串。如果事件没有任何订阅者，事件将被忽略。
-
-        $event_data
-        事件相关的数据，可以是数字、字符串或者数组
-    */
-    // 向所有 worker 进程发布 broadcast 事件
-    Client::publish('broadcast', $event_data);
 };
 
 Worker::runAll();
