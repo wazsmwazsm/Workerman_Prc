@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      ws = new WebSocket("ws://workerman.app:600");
+      ws.onmessage = function(e) {
+          console.log("服务端发来消息: "+e.data);
+      };
+      // 在 console 中输入 ws.send('you message') 进行广播
+      // 输入 ws.send('exit') 终止广播事件
+    </script>
+  </body>
+</html>
