@@ -6,6 +6,7 @@ $worker = new Worker('tcp://0.0.0.0:600');
 
 
 // 设置Worker启动时的回调函数
+// 开启多少个 worker 底层(pcntl) 就 fork 几个子进程出来
 $worker->onWorkerStart = function($worker)
 {
     echo "Worker starting...\n";
