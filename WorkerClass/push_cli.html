@@ -6,7 +6,7 @@
   </head>
   <body>
     <script type="text/javascript">
-      ws = new WebSocket('ws://workerman.app:6788');
+      ws = new WebSocket('ws://192.168.10.10:6788');
       ws.onopen = function() {
         var uid = 'uid' + parseInt(10 * Math.random());
         ws.send(uid);

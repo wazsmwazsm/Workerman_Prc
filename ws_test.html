@@ -6,7 +6,7 @@
   </head>
   <body>
     <script type="text/javascript">
-      ws = new WebSocket("ws://workerman.app:600");
+      ws = new WebSocket("ws://192.168.10.10:600");
       ws.onopen = function() {
         alert("连接成功");
         ws.send('tom');
