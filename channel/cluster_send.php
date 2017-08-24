@@ -75,3 +75,7 @@ $http_worker->onMessage = function($con, $data) {
 };
 
 Worker::runAll();
+
+// 测试
+// http://192.168.10.10:4437/?content=hello-woker8%20worker8&to_worker_id=0&to_con_id=8
+// http://192.168.10.10:4437/?content=hello

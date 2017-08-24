@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      ws = new WebSocket('ws://192.168.10.10:600');
+      ws.onmessage = function(e) {
+          console.log(e.data);
+      }
+      ws.onopen = function() {
+          ws.send('{"cmd":"add_group", "group_id":"124"}');
+          ws.send('{"cmd":"send_to_group", "group_id":"124", "message":"这个是消息2"}');
+      }
+    </script>
+  </body>
+</html>
