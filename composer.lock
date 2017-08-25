@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "8aadb496ee27d25f81e8a8b77c55efa9",
+    "content-hash": "3e885fcd68bf54874d7378592f5ad172",
     "packages": [
         {
             "name": "workerman/channel",
@@ -67,17 +67,55 @@
             "time": "2016-06-02T06:35:44+00:00"
         },
         {
-            "name": "workerman/workerman",
-            "version": "v3.4.7",
+            "name": "workerman/mysql",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/walkor/Workerman.git",
-                "reference": "2818bf310cb903a940f6b5a38f5e520c776db056"
+                "url": "https://github.com/walkor/mysql.git",
+                "reference": "745d62528372e0ca7f1be05f029493b9fce2dc76"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/walkor/Workerman/2818bf310cb903a940f6b5a38f5e520c776db056.zip",
-                "reference": "2818bf310cb903a940f6b5a38f5e520c776db056",
+                "url": "https://files.phpcomposer.com/files/walkor/mysql/745d62528372e0ca7f1be05f029493b9fce2dc76.zip",
+                "reference": "745d62528372e0ca7f1be05f029493b9fce2dc76",
+                "shasum": ""
+            },
+            "require": {
+                "ext-pdo": "*",
+                "ext-pdo_mysql": "*",
+                "php": ">=5.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Workerman\\MySQL\\": "./src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Long-living MySQL connection for daemon.",
+            "homepage": "http://www.workerman.net",
+            "keywords": [
+                "mysql",
+                "pdo",
+                "pdo_mysql"
+            ],
+            "time": "2017-03-18T01:48:33+00:00"
+        },
+        {
+            "name": "workerman/workerman",
+            "version": "v3.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/walkor/Workerman.git",
+                "reference": "d0ceb68782e27537f78735880581829253981c03"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/walkor/Workerman/d0ceb68782e27537f78735880581829253981c03.zip",
+                "reference": "d0ceb68782e27537f78735880581829253981c03",
                 "shasum": ""
             },
             "require": {
@@ -112,7 +150,7 @@
                 "asynchronous",
                 "event-loop"
             ],
-            "time": "2017-08-08T08:51:56+00:00"
+            "time": "2017-08-23T06:03:59+00:00"
         }
     ],
     "packages-dev": [],

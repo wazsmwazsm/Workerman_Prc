@@ -2,6 +2,7 @@
     "require": {
         "workerman/workerman": "^3.4",
         "workerman/GlobalData": "1.0.*",
-        "workerman/Channel": "1.0.*"
+        "workerman/Channel": "1.0.*",
+        "workerman/mysql": "1.0.*"
     }
 }
